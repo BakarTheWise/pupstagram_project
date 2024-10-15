@@ -37,84 +37,60 @@ function createDoggoDiv(dogImage, count) {
     // Returns the created div.
 }
 
-async function fetchData() { 
-    // Asynchronous function to fetch random dog images.
+async function fetchData() {
     try {
-        count++; 
-        // Increments the count for each new fetch.
-        const response = await fetch("https://dog.ceo/api/breeds/image/random"); 
-        // Fetches a random dog image from the API.
+        count++;
+        const response = await fetch("https://dog.ceo/api/breeds/image/random");
 
-        if (!response.ok) { 
-            // Checks if the fetch was successful.
-            throw new Error("Failure to fetch data"); 
-            // Throws an error if the response is not OK.
+        if (!response.ok) {
+            throw new Error("Failure to fetch data");
         }
 
-        const data = await response.json(); 
-        // Parses the response as JSON.
+        const data = await response.json();
+        let doggos = JSON.parse(localStorage.getItem("doggos")) || [];
 
-        let doggos = JSON.parse(localStorage.getItem("doggos")) || []; 
-        // Retrieves existing doggos from localStorage or initializes an empty array.
-
-        doggos.push({ 
-            // Adds a new doggo object to the array.
-            image: data.message, 
-            count: count, 
-            comments: [] // Initializes an empty comments array.
+        doggos.push({
+            image: data.message,
+            count: count,
+            comments: []
         });
 
-        localStorage.setItem("doggos", JSON.stringify(doggos)); 
-        // Saves the updated doggos array to localStorage.
+        localStorage.setItem("doggos", JSON.stringify(doggos));
+        const div = createDoggoDiv(data.message, count);
+        containerDoggo.prepend(div);
 
-        const div = createDoggoDiv(data.message, count); 
-        // Creates a div for the new doggo using the fetched image.
-        containerDoggo.appendChild(div); 
-        // Appends the new doggo div to the container.
+        const likeBtn = div.querySelector(".like-btn");
+        toggleLike(likeBtn); // Pass the button to toggleLike
 
-        attachInputListener(div, doggos.length - 1); 
-        // Attaches input listener for comments to the new doggo div.
-
-        toggleLike();
-
+        attachInputListener(div, doggos.length - 1);
     } catch (error) {
-        console.log(error); 
-        // Logs any errors that occur during fetching.
+        console.log(error);
     }
 }
 
-function loadExistingDoggos() { 
-    // Function to load existing doggos from localStorage.
-    const doggos = JSON.parse(localStorage.getItem("doggos")) || []; 
-    // Retrieves existing doggos or initializes an empty array.
-    
-    doggos.forEach((doggo, index) => { 
-        // Loops through each doggo object.
-        const div = createDoggoDiv(doggo.image, doggo.count); 
-        // Creates a div for each existing doggo.
-        containerDoggo.appendChild(div); 
-        // Appends the doggo div to the container.
 
-        // Set the comment count display
+function loadExistingDoggos() {
+    const doggos = JSON.parse(localStorage.getItem("doggos")) || [];
+
+    doggos.forEach((doggo, index) => {
+        const div = createDoggoDiv(doggo.image, doggo.count);
+        containerDoggo.prepend(div);
+
         const commentCountSpan = div.querySelector(".comment-count");
-        commentCountSpan.textContent = doggo.comments.length; 
-        // Updates the displayed comment count based on existing comments.
+        commentCountSpan.textContent = doggo.comments.length;
 
-        attachInputListener(div, index); 
-        // Attaches input listener for comments to each doggo div.
-
-        // Load existing comments
-        doggo.comments.forEach(comment => { 
-            // Loops through each comment for the doggo.
-            
+        attachInputListener(div, index);
+        doggo.comments.forEach(comment => {
             addUserComment(div, comment);
-            // Adds comment input by user.
         });
+
+        const likeBtn = div.querySelector(".like-btn");
+        toggleLike(likeBtn); // Set like state on page load
     });
 
     count = doggos.length; 
-    // Updates the count based on the number of existing doggos.
 }
+
 
 
 function attachInputListener(div, doggoIndex) { 
@@ -175,19 +151,23 @@ function addUserComment(div, comment) {
     // Appends the comment to the comment s                                                                                                                                                         ection.
 }
 
-function toggleLike() {
-    const likeBtn = document.querySelector(".like-btn");
-    likeBtn.onclick = function() {
-        if (isLiked) {
-            likeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path></svg>`
-            isLiked = false;
-        } else {
-            likeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path></svg>`
-            isLiked = true;
-        }
+function toggleLike(likeBtn) {
+    isLiked = localStorage.getItem("isLiked") === "true";
+
+    if (isLiked) {
+        likeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M20.205 4.791a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412L12 21.414l8.207-8.207c2.354-2.353 2.355-6.049-.002-8.416z"></path></svg>`;
+    } else {
+        likeBtn.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);"><path d="M12 4.595a5.904 5.904 0 0 0-3.996-1.558 5.942 5.942 0 0 0-4.213 1.758c-2.353 2.363-2.352 6.059.002 8.412l7.332 7.332c.17.299.498.492.875.492a.99.99 0 0 0 .792-.409l7.415-7.415c2.354-2.354 2.354-6.049-.002-8.416a5.938 5.938 0 0 0-4.209-1.754A5.906 5.906 0 0 0 12 4.595zm6.791 1.61c1.563 1.571 1.564 4.025.002 5.588L12 18.586l-6.793-6.793c-1.562-1.563-1.561-4.017-.002-5.584.76-.756 1.754-1.172 2.799-1.172s2.035.416 2.789 1.17l.5.5a.999.999 0 0 0 1.414 0l.5-.5c1.512-1.509 4.074-1.505 5.584-.002z"></path></svg>`;
     }
-    
+
+    likeBtn.onclick = function() {
+        isLiked = !isLiked; // Toggle the like state
+        localStorage.setItem("isLiked", isLiked); // Save the new state
+
+        toggleLike(likeBtn); // Update the button appearance
+    };
 }
+
 
 function getTime() { 
     // Function to get the current time.
