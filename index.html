@@ -5,23 +5,37 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>PUPSTAGRAM</title>
     <link rel="stylesheet" href="style.css">
-    <style>
-        
-    </style>
+    <link rel="stylesheet" href="reset.css">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet"/>
+
         
 </head>
 <body>
-    <div class="container">
-        <button class="get-more-btn" onclick="fetchData()">SHOW MORE</button>
-        
-        <!-- <div>
-            <div></div>
-            <img src="" alt="">
-            <div></div>
-            <p></p>
-            <input type="text" class="textBox">
-        </div> -->
-    </div>
+    <header class="primary-header">
+        <div class="container">
+          <div class="header-wrapper">
+              <div class="title-logo">
+                <img src="pupstagram.png" alt="" class="icon-logo">
+                <h1>PUPSTAGRAM</h1>
+              </div>
+              <div class="search-box">
+                <input type="type" placeholder="Search....." />
+                <i class="bx bx-search"></i>
+              </div>
+              <div class="upload-box">
+                <button class="get-more-btn" onclick="fetchData()"><i class="bx bx-cloud-upload"></i>UPLOAD</button>
+              </div>
+          </div>
+        </div>
+    </header>
+
+    <main>
+        <div class="container container-doggo">
+            <div class="container-doggo"></div>
+        </div>
+    </main>
+
+    
     <script src="main.js"></script>
 </body>
 </html>

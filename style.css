@@ -14,20 +14,104 @@
   
     color-scheme: light dark;
     color: rgba(255, 255, 255, 0.87);
-    background-color: #242424;
+    background-color: #f5e8d7;
   
     font-synthesis: none;
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.container {
+    --max-width: 1200px;
+    --container-padding: 2rem;
+
+    width: min(var(--max-width), 100% - (var(--container-padding)*2));
+    margin-inline: auto;
+}
+
+header {
+    background-color: #b97a57;
+}
+
+.header-wrapper {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.4em;
+    background-color: #b97a57;
+    align-items: center;
+}
+
+.icon-logo {
+    max-width: 3rem;
+}
+
+.title-logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.title-logo h1 {
+    font-size: 1rem;
+}
+
+.search-box {
+    background-color: transparent;
+    border: 2px solid white;
+    border-radius: 13px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 1.2rem;
+}
+
+@media (max-width: 50em) {
+    .search-box {
+      display: none;
+    }
   }
+
+.search-box input {
+    background: transparent;
+    outline: none;
+    border: none;
+    color: white;
+    padding: 0.5em 0.8em;
+}
+
+.search-box > i {
+    font-size: 1.5rem;
+    color: white;
+  }
+
+.search-box input::placeholder {
+    color: rgba(255, 255, 255, 0.721);
+  }
+
+  .upload-box {
+    border: 1px solid white;
+  }
+
+  .upload-box button {
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0.2em 0.8em;
+    font-weight: 700;
+  }
+
+  .upload-box button i {
+    vertical-align: middle;
+    margin-bottom: 3px;
+    font-size: 1.9rem;
+    margin-right: 0.2em;
+  }
+
+
+
   
 
 img {
-    display: block;
-    width: 100%;
-    aspect-ratio: 1;
-    max-width: 400px;
     margin-inline: auto;
 }
 
@@ -36,32 +120,40 @@ img {
 }
 
 button {
-    display: block;
-    margin-inline: auto;
+    display: inline-block;
     
 }
 
-.container {
-    max-width: 1100px;
-    margin-inline: auto;
+.container-doggo {
+    max-width: 450px;
 }
 
 .container-image {
+    background-color: #b97a57;
     border: lightgray 1px solid;
-    border-radius: 12px;
+    border-radius: 15px;
     margin-block: 3em;
-    text-align: center;
-    max-width: 400px;
-    margin-inline: auto;
+    padding-bottom: 0.6em;
 }
 
-.container-icon {
+.container-actions {
     display: flex;
+    justify-content: space-between;
+    padding-inline: 1em;
+    align-items: center;
 }
 
 .dog-user {
+    padding-inline: 0.3em;
     display: inline-flex;
+    margin-block: 1em;
+    gap: 0.4em;
     align-items: center;
+}
+
+.dog-user p {
+    font-weight: 700;
+    font-size: 2rem;
 }
 
 .profile-pic {
@@ -70,29 +162,73 @@ button {
     border-radius: 100vh;
 }
 
+.dog-image {
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    aspect-ratio: 1;
+}
+
 .container-comment {
     overflow-y: auto;
-    max-height: 60px;
+    max-height: 40px;
+    padding: 1em 0.8em;
+    background-color: #9f694c;
+    margin-bottom: 0.5em;
 }
 
-input {
-    min-width: max-content;
-    border: none;
+.container-comment p {
+    display: flex;
+    justify-content: space-between;
+    font-size: 1rem;
+    border-bottom: 1px rgb(251, 191, 191) solid;
+}
+
+.span-user {
+    font-weight: 650;
+}
+
+
+.span-time {
+    font-style: italic;
+    color: rgb(203, 184, 184);
+}
+
+
+
+
+
+.message-container {
+    display: flex;
+    align-items: center;
+}
+
+.message-container span {
+    padding-top: 0.5em;
+}
+
+svg {
+    max-width: 2.6rem;
+}
+
+.like-btn {
+    cursor: pointer;
+    background-color: transparent;
     outline: none;
-    padding: 1em;
+    border: none;
 }
 
+.textBox {
+    padding-bottom: 0.5em;
+    min-width: max-content;
+    background-color: transparent ;
+    outline: none;  
+    border: none;
+    border-bottom: 1px solid white; 
+    color: white;
+    margin-right: 1.3em;
+}
 
-@media (prefers-color-scheme: light) {
-    :root {
-      color: #213547;
-      background-color: #ffffff;
-    }
-    a:hover {
-      color: #747bff;
-    }
-    button {
-      background-color: #f9f9f9;
-    }
-  }
+.textBox::placeholder{
+    color: rgba(255, 255, 255, 0.704);
+}
 
