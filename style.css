@@ -202,6 +202,12 @@ button {
     padding-top: 0.5em;
 }
 
+a{
+    text-decoration: none;
+    font-style: none;
+    color: white;
+}
+
 svg {
     max-width: 2.6rem;
 }
