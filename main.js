@@ -9,6 +9,7 @@ let count = parseInt(localStorage.getItem("count")) || 0;
 
 let isLiked = false;
 
+
 function createDoggoDiv(dogImage, count) { 
     // Function to create a new div for displaying a doggo.
     const div = document.createElement("div"); 
@@ -66,6 +67,9 @@ async function fetchData() {
         toggleLike(likeBtn); // Pass the button to toggleLike
 
         attachInputListener(div, doggos.length - 1);
+
+        globalThis.scrollTo({ top: 0, left: 0, behavior: "smooth" });
+
     } catch (error) {
         console.log(error);
     }
@@ -87,7 +91,7 @@ function loadExistingDoggos() {
             addUserComment(div, comment);
         });
 
-        
+
 
         const likeBtn = div.querySelector(".like-btn");
         toggleLike(likeBtn); // Set like state on page load
