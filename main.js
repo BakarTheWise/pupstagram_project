@@ -1,6 +1,9 @@
 const containerDoggo = document.querySelector(".container-doggo"); 
 // Selects the container-doggo element to hold dog images.
 
+const searchBtn = document.querySelector(".search-btn");
+const doggoSearch = document.querySelector(".doggo-search");
+
 let count = parseInt(localStorage.getItem("count")) || 0; 
 // Retrieves the count from localStorage or initializes it to 0.
 
@@ -28,7 +31,7 @@ function createDoggoDiv(dogImage, count) {
                 
                 <span class="comment-count">0</span> <!-- This will hold the comment count -->
             </div>
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="m12 16 4-5h-3V4h-2v7H8z"></path><path d="M20 18H4v-7H2v7c0 1.103.897 2 2 2h16c1.103 0 2-.897 2-2v-7h-2v7z"></path></svg>
+            <a href="${dogImage}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" style="fill: rgba(255, 255, 255, 1);transform: ;msFilter:;"><path d="M11 7.05V4a1 1 0 0 0-1-1 1 1 0 0 0-.7.29l-7 7a1 1 0 0 0 0 1.42l7 7A1 1 0 0 0 11 18v-3.1h.85a10.89 10.89 0 0 1 8.36 3.72 1 1 0 0 0 1.11.35A1 1 0 0 0 22 18c0-9.12-8.08-10.68-11-10.95zm.85 5.83a14.74 14.74 0 0 0-2 .13A1 1 0 0 0 9 14v1.59L4.42 11 9 6.41V8a1 1 0 0 0 1 1c.91 0 8.11.2 9.67 6.43a13.07 13.07 0 0 0-7.82-2.55z"></path></svg></a>
         </div>`;
     // Sets the inner HTML of the div with dog image and comment input.
     
@@ -166,6 +169,31 @@ function toggleLike(likeBtn) {
 
         toggleLike(likeBtn); // Update the button appearance
     };
+}
+
+searchBtn.addEventListener("click", filterDoggos);
+
+function filterDoggos() {
+    const searchTerm = doggoSearch.value.trim().toLowerCase(); // Get and clean input
+    const doggos = JSON.parse(localStorage.getItem("doggos")) || []; // Retrieve doggos from localStorage
+
+    // Clear current display
+    containerDoggo.innerHTML = '';
+
+    // Loop through doggos and display only the matching one
+    doggos.forEach((doggo) => {
+        if (searchTerm === `doggo ${doggo.count}`) {
+            const div = createDoggoDiv(doggo.image, doggo.count);
+            containerDoggo.prepend(div);
+        }
+    });
+
+    // Optionally, handle if no doggo found
+    if (containerDoggo.innerHTML === '') {
+        const noMatchMessage = document.createElement("p");
+        noMatchMessage.textContent = "No matching doggo found.";
+        containerDoggo.appendChild(noMatchMessage);
+    }
 }
 
 

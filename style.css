@@ -159,6 +159,7 @@ button {
     max-width: 40px;
     aspect-ratio: 1;
     border-radius: 100vh;
+    box-shadow: 0 0 1px 2px rgb(175, 60, 45);
 }
 
 .dog-image {
@@ -192,7 +193,6 @@ button {
     color: rgb(203, 184, 184);
 }
 
-
 .message-container {
     display: flex;
     align-items: center;
@@ -213,16 +213,34 @@ svg {
     border: none;
 }
 
+.search-btn {
+    outline: none;
+    border: none;
+    background: transparent;
+}
+
+.search-btn i {
+    font-size: 1.4rem;
+}
+
 .textBox {
     padding-bottom: 0.5em;
-    min-width: max-content;
     background-color: transparent ;
     outline: none;  
     border: none;
     border-bottom: 1px solid white; 
     color: white;
-    margin-right: 1.3em;
 }
+
+@media (max-width: 50em) {
+    .textBox {
+      max-width: 45%;
+    }
+
+    svg {
+        max-width: 2.2rem;
+    }
+  }
 
 .textBox::placeholder{
     color: rgba(255, 255, 255, 0.704);
