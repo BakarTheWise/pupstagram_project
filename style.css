@@ -232,7 +232,10 @@ svg {
     color: white ;
     border: 1px solid white;
 }
-
+.title-logo > h1 {
+    font-size: 2rem;
+    padding-left: 1rem;
+}
 @media (max-width: 525px) {
    .title-logo > h1 {
     font-size: 1.7rem;
