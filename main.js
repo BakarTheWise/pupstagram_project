@@ -87,6 +87,8 @@ function loadExistingDoggos() {
             addUserComment(div, comment);
         });
 
+        
+
         const likeBtn = div.querySelector(".like-btn");
         toggleLike(likeBtn); // Set like state on page load
     });

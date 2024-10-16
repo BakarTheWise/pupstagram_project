@@ -32,6 +32,14 @@
 
 header {
     background-color: #b97a57;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+}
+
+main {
+    margin-top: 6rem;
 }
 
 .header-wrapper {
