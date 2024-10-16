@@ -232,58 +232,5 @@ svg {
     color: white ;
     border: 1px solid white;
 }
-.title-logo > h1 {
-    font-size: 2rem;
-    padding-left: 1rem;
-}
-@media (max-width: 525px) {
-   .title-logo > h1 {
-    font-size: 1.7rem;
-    padding-left: .5rem;
-} 
-
-.title-logo > img {
-    width: 1.7rem;
-}
-}
-
-
-@media (max-width: 437px) {
-.get-more-btn {
-    font-size: .7rem
-}
-
-.bx-cloud-upload{
-    font-size: .8rem;
-}
-.title-logo > h1 {
-    font-size: 1.3rem;
-    padding-left: .3rem;
-} 
-
-.title-logo > img {
-    width: 1.3rem;
-}
-}
-
-@media (max-width: 362px) {
-    .title-logo > h1 {
-    font-size: 1rem;
-    padding-left: .3rem;
-} 
-
-.title-logo > img {
-    width: 1rem;
-}
-
-.get-more-btn {
-    font-size: .5rem
-}
-
-.bx-cloud-upload{
-    font-size: .5rem;
-}
-
-}
 
 
